@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.citipark.beans.User;
+
+import com.cg.citipark.beans.Login;
 import com.cg.citipark.service.MapValidationErrorService;
 import com.cg.citipark.service.UserService;
 
@@ -61,5 +63,16 @@ public class UserController {
 	@PutMapping("/user/update")
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
+	}
+	
+	@GetMapping("/user/login")
+	public boolean Login(@PathVariable String loginId, @PathVariable String password) {
+		boolean b = userService.login(loginId, password);
+		if(b)
+			System.out.println("Login successful");
+		else
+			System.out.println("Invalid Login Credentials");
+		return false;
+		
 	}
 }
